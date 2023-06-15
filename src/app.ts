@@ -1,16 +1,30 @@
-import cors from 'cors'
-import express, { Application, Request, Response } from 'express'
-const app: Application = express()
+import cors from 'cors';
+import express, { Application } from 'express';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
-app.use(cors())
+import routes from './app/routes';
+
+const app: Application = express();
+
+app.use(cors());
 
 // parser used
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// testing
-app.get('/', (req: Request, res: Response) => {
-  res.send('Working successfully!')
-})
+//Application Routes
+app.use('/api/v1/', routes);
 
-export default app
+// // testing
+// app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+//   // console.log(x)
+//   // Promise.reject(new Error('hello man'))
+//   // res.send('Working successfully!')
+//   throw new Error('Testing Brother man')
+//   // next('ore baba')
+// })
+
+// global error handler
+app.use(globalErrorHandler);
+
+export default app;
