@@ -5,9 +5,9 @@ import { ZodError } from 'zod';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
 import handleValidationError from '../../errors/handleValidationErrors';
-import handleZodError from '../../errors/handleZodError';
 import { IGenericErrorMessage } from '../../interfaces/error';
 import { errorLogger } from '../../shared/logger';
+import handleZodError from './handleZodError';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
